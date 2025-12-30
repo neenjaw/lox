@@ -28,6 +28,13 @@ public class Parser {
   }
 
   private Expr comma() {
+    // Error production: check if we start with a binary operator
+    if (check(COMMA)) {
+      Token operator = advance();
+      error(operator, "Expect expression before '" + operator.lexeme + "' operator.");
+      conditional(); // Parse and discard right operand
+    }
+
     Expr expr = conditional();
 
     while (match(COMMA)) {
@@ -53,6 +60,13 @@ public class Parser {
   }
 
   private Expr equality() {
+    // Error production: check if we start with a binary operator
+    if (check(BANG_EQUAL, EQUAL_EQUAL)) {
+      Token operator = advance();
+      error(operator, "Expect expression before '" + operator.lexeme + "' operator.");
+      comparison(); // Parse and discard right operand
+    }
+
     Expr expr = comparison();
 
     while (match(BANG_EQUAL, EQUAL_EQUAL)) {
@@ -65,6 +79,13 @@ public class Parser {
   }
 
   private Expr comparison() {
+    // Error production: check if we start with a binary operator
+    if (check(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
+      Token operator = advance();
+      error(operator, "Expect expression before '" + operator.lexeme + "' operator.");
+      term(); // Parse and discard right operand
+    }
+
     Expr expr = term();
 
     while (match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
@@ -77,6 +98,13 @@ public class Parser {
   }
 
   private Expr term() {
+    // Error production: check if we start with a binary operator
+    if (check(MINUS, PLUS)) {
+      Token operator = advance();
+      error(operator, "Expect expression before '" + operator.lexeme + "' operator.");
+      factor(); // Parse and discard right operand
+    }
+
     Expr expr = factor();
 
     while (match(MINUS, PLUS)) {
@@ -89,6 +117,13 @@ public class Parser {
   }
 
   private Expr factor() {
+    // Error production: check if we start with a binary operator
+    if (check(SLASH, STAR)) {
+      Token operator = advance();
+      error(operator, "Expect expression before '" + operator.lexeme + "' operator.");
+      unary(); // Parse and discard right operand
+    }
+
     Expr expr = unary();
 
     while (match(SLASH, STAR)) {
@@ -149,10 +184,15 @@ public class Parser {
     throw error(peek(), message);
   }
 
-  private boolean check(TokenType type) {
+  private boolean check(TokenType... types) {
     if (isAtEnd())
       return false;
-    return peek().type == type;
+
+    for (TokenType type : types) {
+      if (peek().type == type)
+        return true;
+    }
+    return false;
   }
 
   private Token advance() {
