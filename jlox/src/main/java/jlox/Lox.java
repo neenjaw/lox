@@ -49,9 +49,17 @@ public class Lox {
 		Scanner scanner = new Scanner(source);
 		List<Token> tokens = scanner.scanTokens();
 
-		for (Token token : tokens) {
-			System.out.println(token);
-		}
+		// for (Token token : tokens) {
+		// System.out.println(token);
+		// }
+
+		Parser parser = new Parser(tokens);
+		Expr expression = parser.parse();
+
+		if (hadError)
+			return;
+
+		System.out.println(new AstPrinter().print(expression));
 	}
 
 	// Future TODO: Extract into an ErrorReporter interface/class
@@ -64,5 +72,13 @@ public class Lox {
 		// Future TODO: add the source column, add indicators to find error
 		System.err.println("[line " + line + "] Error" + where + ": " + message);
 		hadError = true;
+	}
+
+	static void error(Token token, String message) {
+		if (token.type == TokenType.EOF) {
+			report(token.line, " at end", message);
+		} else {
+			report(token.line, " at '" + token.lexeme + "'", message);
+		}
 	}
 }
