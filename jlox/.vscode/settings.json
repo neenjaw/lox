@@ -1,4 +1,5 @@
 {
   "java.format.settings.url": ".vscode/java-formatter.xml",
-  "cSpell.words": ["jlox"]
+  "cSpell.words": ["jlox"],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
