@@ -12,6 +12,8 @@ abstract class Expr {
 
     R visitUnaryExpr(Unary expr);
 
+    R visitConditionalExpr(Conditional expr);
+
   }
 
   static class Binary extends Expr {
@@ -73,6 +75,24 @@ abstract class Expr {
     @Override
     <R> R accept(Visitor<R> visitor) {
       return visitor.visitUnaryExpr(this);
+    }
+  }
+
+  static class Conditional extends Expr {
+    public Conditional(Expr condition, Expr thenBranch, Expr elseBranch) {
+      this.condition = condition;
+      this.thenBranch = thenBranch;
+      this.elseBranch = elseBranch;
+
+    }
+
+    final Expr condition;
+    final Expr thenBranch;
+    final Expr elseBranch;
+
+    @Override
+    <R> R accept(Visitor<R> visitor) {
+      return visitor.visitConditionalExpr(this);
     }
   }
 

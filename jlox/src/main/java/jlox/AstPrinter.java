@@ -1,5 +1,7 @@
 package jlox;
 
+import jlox.Expr.Conditional;
+
 class AstPrinter implements Expr.Visitor<String> {
   String print(Expr expr) {
     return expr.accept(this);
@@ -25,6 +27,11 @@ class AstPrinter implements Expr.Visitor<String> {
   @Override
   public String visitUnaryExpr(Expr.Unary expr) {
     return parenthesize(expr.operator.lexeme, expr.right);
+  }
+
+  @Override
+  public String visitConditionalExpr(Expr.Conditional expr) {
+    return parenthesize("cond", expr.condition, expr.thenBranch, expr.elseBranch);
   }
 
   private String parenthesize(String name, Expr... exprs) {

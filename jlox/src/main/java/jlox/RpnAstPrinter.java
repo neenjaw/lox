@@ -1,5 +1,7 @@
 package jlox;
 
+import jlox.Expr.Conditional;
+
 /**
  * This is a challenge question 3
  */
@@ -28,6 +30,11 @@ public class RpnAstPrinter implements Expr.Visitor<String> {
   @Override
   public String visitUnaryExpr(Expr.Unary expr) {
     return visit(expr.operator.lexeme, expr.right);
+  }
+
+  @Override
+  public String visitConditionalExpr(Conditional expr) {
+    throw new UnsupportedOperationException("Unimplemented method 'visitConditionalExpr'");
   }
 
   private String visit(String name, Expr... exprs) {
