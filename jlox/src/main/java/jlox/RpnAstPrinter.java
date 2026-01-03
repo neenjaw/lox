@@ -1,6 +1,8 @@
 package jlox;
 
+import jlox.Expr.Assign;
 import jlox.Expr.Conditional;
+import jlox.Expr.Variable;
 
 /**
  * This is a challenge question 3
@@ -51,6 +53,18 @@ public class RpnAstPrinter implements Expr.Visitor<String> {
     ;
 
     return builder.toString();
+  }
+
+  @Override
+  public String visitVariableExpr(Variable expr) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'visitVariableExpr'");
+  }
+
+  @Override
+  public String visitAssignExpr(Assign expr) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'visitAssignExpr'");
   }
 
   /*

@@ -6,6 +6,7 @@
 /Users/tim/Code/lox/jlox/src/main/java/jlox/RpnAstPrinter.java
 /Users/tim/Code/lox/jlox/src/main/java/jlox/RuntimeError.java
 /Users/tim/Code/lox/jlox/src/main/java/jlox/Scanner.java
+/Users/tim/Code/lox/jlox/src/main/java/jlox/Stmt.java
 /Users/tim/Code/lox/jlox/src/main/java/jlox/Token.java
 /Users/tim/Code/lox/jlox/src/main/java/jlox/TokenType.java
 /Users/tim/Code/lox/jlox/src/main/java/tool/GenerateAst.java
