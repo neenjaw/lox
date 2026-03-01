@@ -1,4 +1,5 @@
 /Users/tim/Code/lox/jlox/src/main/java/jlox/AstPrinter.java
+/Users/tim/Code/lox/jlox/src/main/java/jlox/Environment.java
 /Users/tim/Code/lox/jlox/src/main/java/jlox/Expr.java
 /Users/tim/Code/lox/jlox/src/main/java/jlox/Interpreter.java
 /Users/tim/Code/lox/jlox/src/main/java/jlox/Lox.java
